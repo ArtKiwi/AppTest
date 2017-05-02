@@ -1,0 +1,8 @@
+html {
+    min-height:100%;
+    margin-top: 50px;
+}
+.navbar-brand {
+    padding: 7px 7px;
+    height: 35px;
+ }

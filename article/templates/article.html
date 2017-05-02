@@ -1,0 +1,21 @@
+﻿{%extends 'main.html'%}
+
+{% block article %}
+ <h4> {{article.article_date}}</h4>
+    <h2> {{article.article_title}}</h2>
+    <p>{{ article.article_text}}</p>
+    <hr />
+ <p>Comments</p>
+
+{%for comment in comments%}
+<p> {{comment.comments_text}}</p>
+
+{%endfor%}
+<form id="form" action="/article/addcomment/{{article.id}}/" method= "post" >
+
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" class="button" value="Add comment" />
+</form>
+
+{% endblock %}
