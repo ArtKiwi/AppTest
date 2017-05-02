@@ -1,0 +1,9 @@
+*.log
+*.swp
+*.pot
+*.pyc
+*.sqlite3
+*.iml
+.idea
+.DS_Store
+local_settings.py
