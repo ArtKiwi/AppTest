@@ -8,15 +8,22 @@ from article.forms import CommentForm
 from django.template.context_processors import csrf
 from django.contrib.auth.context_processors import auth
 from django.contrib import auth
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def articles (request, page_number=1):
+def articles (request):
     all_articles= Article.objects.all()
-    current_page = Paginator(all_articles, 5)
-    return render(request, 'articles.html', {'articles':current_page.page(page_number)})
+    paginator = Paginator(all_articles, 5)
+    page = request.GET.get('page')
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        articles = paginator.page(1)
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
+    return render(request, 'articles.html', {'articles':articles})
 
 def article (request, article_id=1):
     comment_form = CommentForm
@@ -53,9 +60,6 @@ def addcomment (request, article_id):
             comment = form.save (commit=False)
             comment.comments_arcticle = Article.objects.get(id=article_id)
             form.save()
-            count=Article.objects.get(id=article_id)
-            count.count_comments +=1
-            count.save ()
             request.session.set_expiry(60)
             request.session ['pause'] = True
     return redirect('/articles/get/%s/' % article_id)

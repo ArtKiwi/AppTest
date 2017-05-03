@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import include, url
 from django.contrib.auth import views
-from loginsys.views import login, logout,register
+from loginsys.views import logout,register
 
 urlpatterns = [
-     url (r'^login/$', login),
-     url (r'^logout/$', logout),
+#    url (r'^login/$', login),
+#    url (r'^logout/$', logout),
      url (r'^register/$', register),
+     url(r'^login/$', views.LoginView.as_view(template_name='login.html'), name='login'),
+     url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
      url(r'^password_change/$', views.PasswordChangeView.as_view(), name='password_change'),
      url(r'^password_change/done/$', views.PasswordChangeDoneView.as_view(), name='password_change_done'),
      url(r'^password_reset/$', views.PasswordResetView.as_view(), name='password_reset'),

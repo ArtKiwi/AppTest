@@ -17,6 +17,7 @@
               <label class="error">{{ login_error}}</label>
           {% endif %}
           <button type="submit" class="btn btn-success">LOG IN</button>
+          <input type="hidden" name="next" value="{{ next }}" />
 
           <a class="btn btn-default" href="/auth/register" role="button">Register</a>
 
