@@ -2,7 +2,9 @@
 {%extends 'main.html'%}
 
 {%block login%}
-  <h1 ></h1>
+      {% if form.errors %}
+      <p> ERROR. Try again. <p>
+      {%endif%}
       <form role="form" action="/auth/login/" method="post" >
           {% csrf_token %}
           <div class="form-group">
@@ -13,9 +15,6 @@
           <label for="password"> password </label>
           <input type="password" name ="password" id="password" />
               </div>
-          {% if login_error %}
-              <label class="error">{{ login_error}}</label>
-          {% endif %}
           <button type="submit" class="btn btn-success">LOG IN</button>
           <input type="hidden" name="next" value="{{ next }}" />
 
