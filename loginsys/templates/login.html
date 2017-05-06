@@ -1,26 +1,22 @@
-
 {%extends 'main.html'%}
 
 {%block login%}
-      {% if form.errors %}
-      <p> ERROR. Try again. <p>
-      {%endif%}
-      <form role="form" action="/auth/login/" method="post" >
-          {% csrf_token %}
-          <div class="form-group">
-          <label for="username"> username </label>
-          <input type="text" name ="username" id="username" />
-              </div>
-          <div class="form-group">
-          <label for="password"> password </label>
-          <input type="password" name ="password" id="password" />
-              </div>
-          <button type="submit" class="btn btn-success">LOG IN</button>
-          <input type="hidden" name="next" value="{{ next }}" />
-
-          <a class="btn btn-default" href="/auth/register" role="button">Register</a>
-
-      </form>
- <a href="/auth/password_reset/">Reset password</a>
-
+    <form role="form" action="/auth/login/" method="post" >
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {{ form.username.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            {{ form.password.errors }}
+        </div>
+        <button type="submit" class="btn btn-success">LOG IN</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+        <a class="btn btn-default" href="/auth/register" role="button">Register</a>
+    </form>
+    <a href="/auth/password_reset/">Reset password</a>
 {%endblock%}
