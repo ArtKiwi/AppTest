@@ -56,7 +56,7 @@ ROOT_URLCONF = 'studyapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "article/templates","loginsys/templates")],
+        'DIRS': [os.path.join(BASE_DIR, "article/templates", "loginsys/templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

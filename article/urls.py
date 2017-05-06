@@ -8,7 +8,5 @@ urlpatterns = [
      url(r'^articles/addlike/(?P<article_id>\d+)/$', views.addlike),
      url(r'^article/addcomment/(?P<article_id>\d+)/', views.addcomment),
      url(r'^page/(\d+)/$', views.articles),
-     url (r'^$', views.articles),
-
-     #url (r'^index', views.index),
+     url(r'^$', views.articles),
 ]

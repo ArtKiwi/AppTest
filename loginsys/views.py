@@ -10,18 +10,21 @@ from django.contrib import auth
 from loginsys.forms import RegistrationForm
 # Create your views here.
 
-def register (request):
-    args={}
+
+def register(request):
+    args = {}
     args.update(csrf(request))
     args['form'] = RegistrationForm()
     if request.POST:
         newuser_form = RegistrationForm(request.POST)
         if newuser_form.is_valid():
             newuser_form.save()
-            newuser = auth.authenticate(username=newuser_form.cleaned_data['username'], password=newuser_form.cleaned_data['password2'])
+            newuser = auth.authenticate(
+                username=newuser_form.cleaned_data['username'],
+                password=newuser_form.cleaned_data['password2']
+            )
             auth.login(request, newuser)
             return redirect('/')
         else:
-            args['from']=newuser_form
-    return render(request,'register.html', args)
-
+            args['from'] = newuser_form
+    return render(request, 'register.html', args)

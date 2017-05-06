@@ -5,7 +5,7 @@ from django.dispatch import receiver
 # Create your models here.
 
 
-class Article (models.Model):
+class Article(models.Model):
     article_title = models.CharField(max_length=200)
     article_text = models.TextField()
     article_date = models.DateTimeField()
@@ -15,18 +15,21 @@ class Article (models.Model):
     def __str__(self):
         return self.article_title
 
-class Comments (models.Model):
-    comments_text = models.TextField(verbose_name="Текст комментария:")
-    comments_arcticle = models.ForeignKey (Article)
 
-@receiver(post_save, sender = Comments)
-def add_count (instance, **kwargs):
+class Comments(models.Model):
+    comments_text = models.TextField(verbose_name="Текст комментария:")
+    comments_arcticle = models.ForeignKey(Article)
+
+
+@receiver(post_save, sender=Comments)
+def add_count(instance, **kwargs):
     count = instance.comments_arcticle
     count.count_comments += 1
     count.save()
 
-@receiver(post_delete, sender = Comments)
-def reduce_count (instance, **kwargs):
+
+@receiver(post_delete, sender=Comments)
+def reduce_count(instance, **kwargs):
     profile = instance.comments_arcticle
     profile.count_comments -= 1
     profile.save()
