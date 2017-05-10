@@ -1,0 +1,25 @@
+{%extends 'main.html'%}
+{%block login%}
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <td>Username:</td>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <td>Mail:</td>
+                <td> {{ user.email }}</td>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td>{{ user.first_name }}</td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td>{{ user.last_name }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p> <a href="/auth/password_change/"><span class="glyphicon glyphicon-repeat"></span> Change password </a>
+    <p> <a href="/auth/edit/"><span class="glyphicon glyphicon-pencil"></span> Edit profile information</a>
+{%endblock%}

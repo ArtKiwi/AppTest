@@ -8,6 +8,9 @@ from django.template.context_processors import csrf
 from django.contrib.auth import authenticate, login
 from django.contrib import auth
 from loginsys.forms import RegistrationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.context_processors import auth
+from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -28,3 +31,8 @@ def register(request):
         else:
             args['from'] = newuser_form
     return render(request, 'register.html', args)
+
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')

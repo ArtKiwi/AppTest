@@ -21,7 +21,7 @@
 
          {%if user.username%}
          <li> <a href="/auth/logout/"> Log Out({{user.username}}) <span class="glyphicon glyphicon-log-out"></span></a></li>
-         <li> <a href="/auth/password_change/"> Change password <span class="glyphicon glyphicon-repeat"></span></a></li>
+         <li> <a href="/auth/profile/"> Profile <span class="glyphicon glyphicon-user"></span></a></li>
          {%else%}
          <li> <a href="/auth/login/"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
          {%endif%}
