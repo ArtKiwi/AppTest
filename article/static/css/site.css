@@ -5,4 +5,11 @@ html {
 .navbar-brand {
     padding: 7px 7px;
     height: 35px;
- }
+}
+.comments{
+   color:red;
+   text: right;
+}
+th .comments {
+    text-align: right;
+}

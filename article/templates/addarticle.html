@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+{% block article %}
+<div id="summernote" class="text-center">
+    <form id="form" action="/addarticle/" method= "post" >
+        {% csrf_token %}
+        <p> {{ form.article_title.label_tag }}
+            {{ form.article_title }}</p>
+        <p>{{ form.article_date.label_tag }}
+            {{ form.article_date }}<p>
+        <p>{{ form.article_text.label_tag }}</p>
+        {{ form.article_text }}
+        <script>
+            var settings_id_article_text = {"height": 480, "toolbar": [["style", ["style"]],
+            ["font", ["bold", "italic", "underline", "superscript", "subscript", "strikethrough",
+            "clear"]], ["fontname", ["fontname"]], ["fontsize", ["fontsize"]], ["color",
+            ["color"]], ["para", ["ul", "ol", "paragraph"]], ["height", ["height"]],
+            ["table", ["table"]], ["insert", ["link", "picture", "video", "hr"]], ["view",
+            ["fullscreen", "codeview"]], ["help", ["help"]]], "url": {"upload_attachment":
+            "/summernote/upload_attachment/"}, "width": 720, "lang": "en-US"};
+        </script>
+        <iframe id="id_article_text_iframe" src="/summernote/editor/id_article_text/"
+            frameborder="0"  required width="720" height="480"></iframe>
+        <p><input type="submit" class="button" value="Add article" /></p>
+    </form>
+</div>
+{% endblock %}

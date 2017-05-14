@@ -1,62 +1,54 @@
 ﻿{%load staticfiles%}
 <!DOCTYPE html>
-
 <html>
-<head>
-    <meta charset="utf-8" >
-    <title>TestApp</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}" />
-  </head>
-<body>
-<div class="page-wrapper">
-<nav class="navbar navbar-inverse bg-inverse navbar-fixed-top">
- <div class="container">
-     <a class="navbar-brand"  href="/"> <img alt="Brand" src={%static 'images/logo.png'%} height="50" /></a>
-     <ul class="nav navbar-nav">
-
-     </ul>
-     <ul class="nav navbar-nav navbar-right">
-
-         {%if user.username%}
-         <li> <a href="/auth/logout/"> Log Out({{user.username}}) <span class="glyphicon glyphicon-log-out"></span></a></li>
-         <li> <a href="/auth/profile/"> Profile <span class="glyphicon glyphicon-user"></span></a></li>
-         {%else%}
-         <li> <a href="/auth/login/"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-         {%endif%}
-         </ul>
- </div>
-</nav>
-
-<div class="container">
-<div class ="parent">
-<div class="row">
-   <div class ="col-md-8 col-md-offset-0">
-    {%block article%}{%endblock%}
-  </div>
-    <div class="col-md-4">
-
-    </div>
-    </div>
-
-<div class="row">
-   <div class ="col-md-4 col-md-offset-4">
-   {%block login%}{%endblock%}
-   </div>
-</div>
- </div>
-    </div>
- </div>
-    <div class="text-center">
-
-         <hr/>
+    <head>
+        <meta charset="utf-8" >
+        <title>TestApp</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}" />
+        <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/site.js' %}"></script>
+    </head>
+    <body>
+        <div id="summernote"></div>
+        <div class="page-wrapper">
+            <nav class="navbar navbar-inverse bg-inverse navbar-fixed-top">
+                <div class="container">
+                    <a class="navbar-brand"  href="/"> <img alt="Brand" src={% static 'images/logo.png' %} height="50" /></a>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if perms.article.add_article %}
+                            <li> <a href="/addarticle/"> Add Article </a></li>
+                        {% endif %}
+                        {% if user.username %}
+                            <li> <a href="/auth/logout/"> Log Out({{ user.username }}) <span class="glyphicon glyphicon-log-out"></span></a></li>
+                            <li> <a href="/auth/profile/"> Profile <span class="glyphicon glyphicon-user"></span></a></li>
+                        {% else %}
+                            <li> <a href="/auth/login/"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+            <div class="container">
+                <div class ="parent">
+                    <div class="row">
+                        <div class ="col-md-8 col-md-offset-0">
+                            {% block articles %}{% endblock %}
+                        </div>
+                    </div>
+                    {% block article %}{% endblock %}
+                    <div class="row">
+                        <div class ="col-md-4 col-md-offset-4">
+                            {% block login %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <hr/>
             <p>Developed by ArtKiwi 2017©</p>
+        </div>
 
-   </div>
-
-    <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js'%}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
-    <script type="text/javascript" src="{% static 'js/site.js'%}"></script>
-</body>
+    </body>
 </html>

@@ -4,13 +4,13 @@ from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext, context, Template
 from article.models import Article, Comments
 from django.core.exceptions import ObjectDoesNotExist
-from article.forms import CommentForm
+from article.forms import CommentForm, ArticleForm
 from django.template.context_processors import csrf
 from django.contrib.auth.context_processors import auth
 from django.contrib import auth
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpRequest
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 def articles(request):
@@ -33,8 +33,6 @@ def article(request, article_id=1):
     args['article'] = Article.objects.get(id=article_id)
     args['comments'] = Comments.objects.filter(comments_arcticle_id=article_id)
     args['form'] = comment_form
-    args['username'] = auth.get_user(request).username
-    args['count_comments'] = Comments.objects.get(id=article_id)
     return render(request, 'article.html', args)
 
 
@@ -66,3 +64,30 @@ def addcomment(request, article_id):
             request.session.set_expiry(60)
             request.session['pause'] = True
     return redirect('/articles/get/%s/' % article_id)
+
+
+@permission_required('article.add_article')
+def addarticle(request):
+    form = ArticleForm()
+    if request.POST:
+        addform = ArticleForm(request.POST)
+        if addform.is_valid():
+            addform.save()
+        else:
+            form = addform
+    return render(request, 'addarticle.html', {'form': form})
+
+
+@permission_required('article.change_article')
+def editarticle(request, id):
+    article = Article.objects.get(id=id)
+    form = ArticleForm(instance=article)
+    if request.POST:
+        changeform = ArticleForm(request.POST, instance=article)
+        if changeform.is_valid():
+            article = changeform.save()
+            article.save()
+            return redirect('/')
+        else:
+            form = changeform
+    return render(request, 'editarticle.html', {'form': form, 'article': article})

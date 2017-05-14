@@ -1,34 +1,47 @@
-﻿{%extends 'main.html'%}
-{%load staticfiles%}
+﻿{% extends 'main.html' %}
+{% block articles %}
 
-{%block article%}
-
-{% for article in articles%}
-
-<h6>Date publication: {{article.article_date}}</h6>
-<h4><a href="/articles/get/{{ article.id}}" >{{ article.article_title}} </a></h4>
-<p>{{ article.article_text}}</p>
-<p id="likes"><a href="articles/addlike/{{article.id}}/">
-    <span class="glyphicon glyphicon-thumbs-up">  </span>{{ article.article_likes }}</a></p>
-<p id="comments"><a href="/articles/get/{{ article.id}}">
-    <span class="glyphicon glyphicon-comment">  </span>{{  article.count_comments}}</a></p>
-
-{%endfor%}
+{% for article in articles %}
+    <h6>Date publication: {{ article.article_date }}</h6>
+    <h4><a href="/articles/get/{{ article.id}}" >{{ article.article_title }} </a></h4>
+    <p>{{ article.article_text|truncatewords_html:150 |safe }}</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <a href="articles/addlike/{{ article.id }}/"
+                    <span class="glyphicon glyphicon-thumbs-up"></span> {{ article.article_likes }}</a>
+                </th>
+                {% if perms.article.change_article %}
+                    <th>
+                        <div class="text-center">
+                            <a href="/edit/{{ article.id }}"> Edit article   </a>
+                        </div>
+                    </th>
+                {% endif %}
+                <th>
+                    <div class="comments">
+                        <a href="/articles/get/{{ article.id}}">
+                        <span class="glyphicon glyphicon-comment"></span> {{ article.count_comments }}</a>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+    </table>
+{% endfor %}
 
 <div class="text-center">
-            <span class="step-links">
-                {% if articles.has_previous %}
-                   <a href="?page={{ articles.previous_page_number}}">previous</a>
-                {% endif %}
-
-                <span class="current">
-                    Page {{ articles.number }}
-                </span>
-
-                {% if articles.has_next %}
-                  <a href="?page={{ articles.next_page_number }}">next</a>
-                {% endif %}
-            </span>
-
+    <span class="step-links">
+        {% if articles.has_previous %}
+            <a href="?page={{ articles.previous_page_number}}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ articles.number }}
+        </span>
+        {% if articles.has_next %}
+            <a href="?page={{ articles.next_page_number }}">next</a>
+        {% endif %}
+    </span>
 </div>
-{%endblock%}
+
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from article.models import Article, Comments
+from django_summernote.admin import SummernoteModelAdmin
 
 
 class ArticleInLine(admin.StackedInline):
@@ -7,8 +8,8 @@ class ArticleInLine(admin.StackedInline):
     extra = 2
 
 
-class Article_Admin(admin.ModelAdmin):
-    fields = ['article_title', 'article_text', 'article_date']
+class Article_Admin(SummernoteModelAdmin):
+    fields = ['article_title', 'article_text']
     inlines = [ArticleInLine]
     list_filter = ['article_date']
 
