@@ -73,8 +73,6 @@ def addarticle(request):
         addform = ArticleForm(request.POST)
         if addform.is_valid():
             addform.save()
-        else:
-            form = addform
     return render(request, 'addarticle.html', {'form': form})
 
 
@@ -85,9 +83,6 @@ def editarticle(request, id):
     if request.POST:
         changeform = ArticleForm(request.POST, instance=article)
         if changeform.is_valid():
-            article = changeform.save()
-            article.save()
+            changeform.save()
             return redirect('/')
-        else:
-            form = changeform
     return render(request, 'editarticle.html', {'form': form, 'article': article})
