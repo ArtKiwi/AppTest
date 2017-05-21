@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
 {% block article %}
-<div id="summernote" class="text-center">
+<div id="summernote" class="text-center context">
     <form id="form" action="/edit/{{ article.id }}/" method= "post" >
         {% csrf_token %}
         <p> {{ form.article_title.label_tag }}

@@ -1,36 +1,38 @@
 ﻿{% extends 'main.html' %}
 {% block articles %}
-
+<div class="context">
 {% for article in articles %}
-    <h6>Date publication: {{ article.article_date }}</h6>
-    <h4><a href="/articles/get/{{ article.id}}" >{{ article.article_title }} </a></h4>
-    <p>{{ article.article_text|truncatewords_html:150 |safe }}</p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    <a href="articles/addlike/{{ article.id }}/"
-                    <span class="glyphicon glyphicon-thumbs-up"></span> {{ article.article_likes }}</a>
-                </th>
-                {% if perms.article.change_article %}
+    <div class="articles">
+        <h6>Date publication: {{ article.article_date }}</h6>
+        <h4><a href="/articles/get/{{ article.id}}" >{{ article.article_title }} </a></h4>
+        <p>{{ article.article_text|truncatewords_html:150 |safe }}</p>
+        <table class="table">
+            <thead>
+                <tr>
                     <th>
-                        <div class="text-center">
-                            <a href="/edit/{{ article.id }}"> Edit article   </a>
+                        <a href="articles/addlike/{{ article.id }}/"
+                        <span class="glyphicon glyphicon-thumbs-up"></span> {{ article.article_likes }}</a>
+                    </th>
+                    {% if perms.article.change_article %}
+                        <th>
+                            <div class="text-center">
+                                <a href="/edit/{{ article.id }}"> Edit article   </a>
+                            </div>
+                        </th>
+                    {% endif %}
+                    <th>
+                        <div class="comments">
+                            <a href="/articles/get/{{ article.id}}">
+                            <span class="glyphicon glyphicon-comment"></span> {{ article.count_comments }}</a>
                         </div>
                     </th>
-                {% endif %}
-                <th>
-                    <div class="comments">
-                        <a href="/articles/get/{{ article.id}}">
-                        <span class="glyphicon glyphicon-comment"></span> {{ article.count_comments }}</a>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-    </table>
+                </tr>
+            </thead>
+        </table>
+    </div>
 {% endfor %}
 
-<div class="text-center">
+<div class="paginator">
     <span class="step-links">
         {% if articles.has_previous %}
             <a href="?page={{ articles.previous_page_number}}">previous</a>
@@ -43,5 +45,5 @@
         {% endif %}
     </span>
 </div>
-
+</div>
 {% endblock %}

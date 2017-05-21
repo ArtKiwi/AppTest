@@ -1,15 +1,97 @@
 html {
     min-height:100%;
-    margin-top: 50px;
 }
+
+body {
+ background: #222222
+}
+
 .navbar-brand {
-    padding: 7px 7px;
-    height: 35px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 40px;
+    color:green;
 }
-.comments{
-   color:red;
-   text: right;
+
+.navbar-brand .Brand1 {
+    color:orange;
 }
+
+table {
+    table-layout: fixed; /* Фиксированная ширина ячеек */
+    width: 100%; /* Ширина таблицы */
+    border-bottom:solid #222222;
+}
+
 th .comments {
     text-align: right;
+}
+
+.navbar a:hover {
+    color:orange;
+}
+
+.navbar-custom .navbar-right a {
+    font-size: 20px;
+    color: #222222;
+    margin-bottom: 0;
+    text-transform: uppercase; /* прописные буквы */
+}
+
+.navbar-custom .navbar-right a:hover {
+    color: green;
+}
+
+.navbar-custom.top-nav-collapse {
+    padding: 0;
+    background: #222222;
+}
+
+.navbar-custom.top-nav-collapse .navbar-right a {
+    color: #eeddcc;
+}
+
+.navbar-custom.top-nav-collapse .navbar-right a:hover {
+    color: orange;
+    background-color: transparent;
+}
+
+.intro {
+    margin: 0px 0px 0px 0px;
+    width: 100%;
+    height: auto;
+    padding: 100px;
+    text-align: center;
+    color: white;
+    background: url(../images/125kb.jpg) no-repeat bottom center scroll;
+}
+
+.intro h3 {
+    text-align: right;
+}
+
+.articles p {
+    text-indent: 2.5em; /* абзац */
+    text-align: justify; /* выравнивание по ширине */
+}
+.context {
+    padding: 15px 15px 15px 15px;
+    background: #eeddcc;
+}
+
+.paginator {
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+footer {
+    height:50px;
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+    background: #222222;
+}
+
+footer > p {
+    padding-top:15px;
+    margin-bottom: 0px;
 }
