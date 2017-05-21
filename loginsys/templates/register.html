@@ -1,20 +1,14 @@
 ﻿{%extends 'main.html'%}
 
 {%block login%}
-  <h1 > </h1>
-
-      <form class="" role="form" action="/auth/register/" method="post" >
-          {% csrf_token %}
-
-         <h6> E-mail(required field): {{form.email}}</h6>
-         <h6> Login (required field): {{form.username}}</h6>
-         <h6> Password (required field): {{form.password1}}</h6>
-         <h6> Password confirmation (required field): {{form.password2}}</h6>
-
-
-          <button type="submit" class="btn btn-success">Register</button>
-
-      </form>
-
-
+    <div class="context">
+        <h3>Registration </h3>
+        <form class="" role="form" action="/auth/register/" method="post">
+            {% csrf_token %}
+            <h6> Login (required field): {{form.username}}</h6>
+            <h6> Password (required field): {{form.password1}}</h6>
+            <h6> Password confirmation (required field): {{form.password2}}</h6>
+            <button type="submit" class="btn btn-success">Register</button>
+        </form>
+    </div>
 {%endblock%}
