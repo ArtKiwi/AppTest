@@ -38,17 +38,12 @@ def profile(request):
     return render(request, 'profile.html')
 
 
-# need help
 @login_required
 def edituserinfo(request):
-    user = request.user
-    form = Edituserform(instance=user)
+    form = Edituserform(instance=request.user)
     if request.POST:
-        change_form = Edituserform(request.POST, instance=user)
+        change_form = Edituserform(request.POST, instance=request.user)
         if change_form.is_valid():
-            user = change_form.save(commit=False)
-            user.save()
+            change_form.save()
             return redirect('/auth/profile/')
-        else:
-            form = change_form
     return render(request, 'editinfo.html', {'form': form})
