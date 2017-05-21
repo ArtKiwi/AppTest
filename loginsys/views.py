@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template.context_processors import csrf
 from django.contrib.auth import authenticate, login
 from django.contrib import auth
-from loginsys.forms import RegistrationForm
+from loginsys.forms import RegistrationForm, Edituserform
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.context_processors import auth
 from django.contrib.auth.models import User
@@ -42,9 +42,9 @@ def profile(request):
 @login_required
 def edituserinfo(request):
     user = request.user
-    form = UserChangeForm(instance=user)
+    form = Edituserform(instance=user)
     if request.POST:
-        change_form = UserChangeForm(request.POST, instance=user)
+        change_form = Edituserform(request.POST, instance=user)
         if change_form.is_valid():
             user = change_form.save(commit=False)
             user.save()
