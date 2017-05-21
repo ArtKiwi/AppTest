@@ -17,7 +17,7 @@ from django.contrib.auth.forms import UserChangeForm
 def register(request):
     args = {}
     args.update(csrf(request))
-    args['form'] = RegistrationForm(instance=user)
+    args['form'] = RegistrationForm()
     if request.POST:
         newuser_form = RegistrationForm(request.POST)
         if newuser_form.is_valid():
